@@ -1,21 +1,21 @@
 class Forecast{
   final DateTime date;
   final double temperature;
-  final String description;
-  final String icon;
+  final String main;
+
 
   Forecast({
     required this.date,
     required this.temperature,
-    required this.description,
-    required this.icon});
+    required this.main
+   });
 
   factory Forecast.fromJson(Map<String, dynamic> json){
     return Forecast(
-        date: DateTime.fromMicrosecondsSinceEpoch(json['dt'] * 1000),
-        temperature: json['main']['temp'].toDouble(),
-        description: json['weather'][0]['description'],
-        icon: json['weather'][0]['icon']);
+        date: DateTime.parse(json['dt_txt']),
+      main: json['weather'][0]['main']?? 'unknown',
+        temperature: json['main']['temp'].toDouble(),);
+
   }
 }
 

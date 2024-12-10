@@ -11,9 +11,7 @@ class WeatherService{
     final url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey");
 
     final response = await http.get(url);
-    log(response.body);
     if(response.statusCode == 200){
-      log("+++++++++===${response.body}");
       return CurrentWeather.fromJson(jsonDecode(response.body)) ;
     }else{
       throw Exception('Failed to load current weather');
@@ -21,12 +19,14 @@ class WeatherService{
   }
 
   Future<WeatherForecastResponse> fetchWeatherForecastResponse(double lat, double lon)async{
-    final url = Uri.parse("https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon$lon=&appid=$apiKey");
+    final url = Uri.parse("https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lon&appid=$apiKey");
 
     final response = await http.get(url);
+    log(response.body);
     if(response.statusCode == 200){
-      log("+++++++++===${response.body}");
+      log("========================${response.body}");
       return WeatherForecastResponse.fromJson(jsonDecode(response.body)) ;
+
     }else{
       throw Exception('Failed to load current weather');
     }

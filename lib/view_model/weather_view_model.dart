@@ -67,6 +67,7 @@ class WeatherViewModel extends ChangeNotifier{
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
       await getCurrentWeather(position.latitude, position.longitude);
+      await getWeatherForecast(position.latitude, position.longitude);
     } catch (e) {
       debugPrint('Error: $e');
       isLoading = false;
@@ -77,6 +78,7 @@ class WeatherViewModel extends ChangeNotifier{
     notifyListeners();
   }
   }
+
 
 
 }
